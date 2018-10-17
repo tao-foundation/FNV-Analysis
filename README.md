@@ -116,8 +116,11 @@ fnvtest
 F(00,00)::VEC(0, 0, ffffffff, 0)::      FNV  :00000000, DF=00000000(00) DS(00000000), FNV1 :00000000, DF=00000000(00) DS(00000000), FNV1a:117697cd, DF=117697cd(17) DS(117697cd), FNV1c:1210d00f, DF=127f8dbf(20) DS(11a1725f),         F___RC=efe1b9c4, DF:efe1b9c4(19) , F1__RC=deb68dfe, DF:deb68dfe(22) , F1A_RC=99bad28b, DF:99bad28b(17) , F1C_RC=e29fa497, DF:e29fa497(18)
 F(00,01)::VEC(0, 1, ffffffff, 0)::      FNV  :00000001, DF=00000001(01) DS(00000001), FNV1 :01000193, DF=01000193(06) DS(01000193), FNV1a:1076963a, DF=010001f7(09) DS(01000193), FNV1c:1110ce7c, DF=03001e73(11) DS(01000193),         F___RC=fefffe6d, DF:111e47a9(14) , F1__RC=d9fd8597, DF:074b0869(12) , F1A_RC=72c287e0, DF:eb78556b(19) , F1C_RC=6b6991ef, DF:89f63578(17)
 ```
+
 `F(00,01)` : is input x,y 
+
 `VEC(0, 1, ffffffff, 0)`  : is `fnv_reduce` input vector (a,b,c,d)
+
 `FNV  :00000001, DF=00000001(01) DS(00000001)` : 
   * `FNV(00,01)` result is 00000001 , 
   * `DF` : is changed bitcounts, compared with previous outputs, in this case prev[00,00] current[00,01] input is 1bit changed, and output result 1bit changed.
