@@ -74,10 +74,19 @@ Followings are reference implementation of FNV1A adapted in TETHashV1.
 #define FNV_OFFSET_BASIS  0x811c9dc5U
 
 #ifdef __ETHASH__
+
 #define fnv(x, y)        ((x) * FNV_PRIME ^ (y))
+#define fnv_reduce(a,b,c,d) (fnv(fnv(fnv(a, b), c), d))
+
 #else  // default __TETHASHV1__ 
+
 #define fnv1a(x, y)         ((((FNV_OFFSET_BASIS^(x))*FNV_PRIME) ^ (y)) * FNV_PRIME)
+#define fnv1a_reduce(a,b,c,d) (fnv1a(fnv1a(fnv1a(a, b), c), d))
+
 #endif
+
+
+#define fnv1a_reduce(v) fnv1a(fnv1a(fnv1a(v.x, v.y), v.z), v.w)
 ```
 There's another implementation of Character Size (1Byte) hash message based FNV1A, It's called us , **FNV1c**
 It's more secure compared with above hash implementation. 
