@@ -7,8 +7,11 @@ You can refer original FNV Hash algorithm wiki [here](https://en.wikipedia.org/w
 ### Where FNV Applied on ETHASH
 
 - In [ETHASH](https://github.com/ethereum/wiki/wiki/Ethash) , FNV Hash is used on
-  * 1) On Data aggregation function, MIX parts
-       Current Applied FNV0 Hash Implementation is depricated now.[FNV-0_hash (deprecated)](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function#FNV-0_hash_(deprecated))
+  * 1) On Data aggregation function, MIX parts.
+  
+       Current Applied FNV0 Hash Implementation is depricated now.
+       [FNV-0_hash (deprecated)](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function#FNV-0_hash_(deprecated))
+       
        It is simple way of hashing algorithm
   ```
    hash = 0
@@ -17,18 +20,25 @@ You can refer original FNV Hash algorithm wiki [here](https://en.wikipedia.org/w
    	hash = hash XOR octet_of_data
    return hash
   ```
-  When Analysed FNV-0 , there's weak [avalanche effect](https://simple.wikipedia.org/wiki/Avalanche_effect) , when hash input changes on 1~2bits.
+  When Analysed FNV-0 , there's weak [avalanche effect](https://simple.wikipedia.org/wiki/Avalanche_effect), when hash input changes on 1~2bits.
   So, It may be deprecated.
+  
   We need to research newer FNV Hash or short message hash algorithm.
 
 ### TEThashV1 (Trust ETHASH Version1) has adapted FNV1A hash function
 
 Recent days, Prevent ASIC Miners.
 There's several proposals for change ETHASH Algorithms.
-In April on this year, trustfarm also suggested to change Keccack algorithm and MIX algorithm. [Issue Suggestion](https://github.com/ethereum/EIPs/issues/958#issuecomment-377849594)
+
+In April on this year,
+
+@trustfarm-dev also suggested to change Keccack algorithm and MIX algorithm. [Issue Suggestion](https://github.com/ethereum/EIPs/issues/958#issuecomment-377849594)
 
 Other's also suggest to use FNV1 or FNV1A hash algorithm on MIX parts.
-[EIP-969](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-969.md) ,  [EIP-1057 - ProgPoW](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1057.md) , [EIP-1355](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1355.md)
+
+[EIP-969](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-969.md) ,  
+[EIP-1057 - ProgPoW](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1057.md) , 
+[EIP-1355](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1355.md)
 
 There's implementation doesn't looks like FNV1A , Implementation Form is looks like FNV1.
 
@@ -45,6 +55,7 @@ The FNV-1a hash differs from the FNV-1 hash by only the order in which the multi
    return hash
 ```
 Big Differences are **FNV1A vs FNV1** is use of initial **FNV_offset_basis**.
+
 Offset Makes one more computation, multiplication loop, and more secure hash effects than FNV1.
 
 In TETHashV1, Adapts fully follow the FNV1A implementation.
@@ -69,7 +80,10 @@ Followings are reference implementation of FNV1A adapted in TETHashV1.
 #endif
 ```
 There's another implementation of Character Size (1Byte) hash message based FNV1A, It's called us , **FNV1c**
-It's more secure compared with above hash implementation. But, FNV1A is also enough, when `fnv_reduce()`.
+It's more secure compared with above hash implementation. 
+
+But, FNV1A is also enough, when `fnv_reduce()`.
+
 Finally, We consider realistic implementation and computing speeds, choosed **FNV1A**.
 
 Here's TAO's implementation of FNV1c , 4times more computation, mulitplication loops.
