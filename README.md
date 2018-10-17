@@ -65,7 +65,7 @@ In TETHashV1, Adapts fully follow the FNV1A implementation.
 Followings are reference implementation of FNV1A adapted in TETHashV1.
 
 ```
--- reference OpenCL implementation
+-- Reference Pseudo implementation
 
 #define __TETHASHV1__
 #undef __ETHASH__
@@ -85,8 +85,6 @@ Followings are reference implementation of FNV1A adapted in TETHashV1.
 
 #endif
 
-
-#define fnv1a_reduce(v) fnv1a(fnv1a(fnv1a(v.x, v.y), v.z), v.w)
 ```
 There's another implementation of Character Size (1Byte) hash message based FNV1A, It's called us , **FNV1c**
 It's more secure compared with above hash implementation. 
