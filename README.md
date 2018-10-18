@@ -146,7 +146,7 @@ F(00,10)::VEC(0, 10, ffffffff, 0)::     FNV  :00000010, DF=0000001f(05) DS(00000
 `FNV  :00000001, DF=00000001(01) DS(00000001)` : 
   * `FNV(00,01)` result is 00000001 , 
   * `DF` : is changed bitcounts, compared with previous outputs, in this case prev[00,00] current[00,01] input is 1bit changed, and output result 1bit changed.
-  * `DS` : is difference of previous result and current result , ABS(prev_fnvresult,current_fnvresult).
+  * `DS` : is distances of previous result and current result , ABS(prev_fnvresult,current_fnvresult).
 
 ** Basically, `DF` is higher is best on hash algorithm.
 
